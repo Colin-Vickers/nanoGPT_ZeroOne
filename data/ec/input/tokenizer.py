@@ -1,0 +1,164 @@
+#functions for converting too and from the alphabet
+
+ec_alphabet = [
+    "(START)",
+    "(END)",
+    "(UNKNOWN)",
+    "RECEIVE WAFER LOT",
+    "LOT IDENTIFICATION",
+    "INITIAL WAFER INSPECTION",
+    "MEASURE SURFACE DEFECTS",
+    "WAFER CLEAN PRE PROCESS",
+    "RCA CLEAN 1",
+    "WET CLEAN RCA2",
+    "HF DIP",
+    "DRY WAFER",
+    "WAFER CLEAN PRE-GRIND",
+    "GRINDING WAFER BACKSIDE",
+    "MEASURE GEOMETRY",
+    "ETCH WET BACKSIDE",
+    "RINSE WET WAFER_EDGE",
+    "DRY WAFER BACKSIDE",
+    "BACKSIDE CLEAN",
+    "MEASURE BACKSIDE ROUGHNESS",
+    "THERMAL OXIDATION",
+    "MEASURE OXIDE THICKNESS",
+    "RCA CLEAN 2",
+    "OXIDE STRIP",
+    "SURFACE PREP FOR DEPOSITION",
+    "DEPOSIT PAD OXIDE",
+    "ANNEAL OXIDE",
+    "MEASURE FILM THICKNESS",
+    "SPIN COAT PHOTORESIST",
+    "SOFT BAKE",
+    "ALIGN MASK LEVEL 1",
+    "EXPOSE LITHO LEVEL 1",
+    "DEVELOP PHOTORESIST",
+    "INSPECT PATTERN LEVEL 1",
+    "HARD BAKE",
+    "OXIDE ETCH DRY",
+    "STRIP RESIST",
+    "CLEAN AFTER ETCH",
+    "MEASURE CD LEVEL 1",
+    "DEPOSIT POLYSILICON",
+    "ANNEAL POLYSILICON",
+    "ALIGN MASK LEVEL 2",
+    "EXPOSE LITHO LEVEL 2",
+    "PATTERN INSPECTION LEVEL 2",
+    "POLYSILICON ETCH DRY",
+    "STRIP RESIST LEVEL 2",
+    "CLEAN AFTER POLY ETCH",
+    "IMPLANT N-TYPE",
+    "RAPID THERMAL ANNEAL",
+    "MEASURE SHEET RESISTANCE",
+    "DEPOSIT INTERLEVEL DIELECTRIC",
+    "DENSIFY DIELECTRIC",
+    "CMP INTERLAYER DIELECTRIC",
+    "MEASURE PLANARITY",
+    "ALIGN MASK LEVEL 3",
+    "EXPOSE LITHO LEVEL 3",
+    "VIA INSPECTION",
+    "VIA ETCH THROUGH DIELECTRIC",
+    "CLEAN AFTER VIA ETCH",
+    "DEPOSIT BARRIER METAL",
+    "DEPOSIT TUNGSTEN SEED",
+    "FILL VIA TUNGSTEN",
+    "CMP METAL",
+    "DEPOSIT TOP METAL",
+    "ANNEAL METAL 1",
+    "ALIGN MASK LEVEL 4",
+    "EXPOSE LITHO LEVEL 4",
+    "METAL PATTERN INSPECTION",
+    "METAL ETCH DRY",
+    "STRIP PHOTORESIST",
+    "CLEAN AFTER METAL ETCH",
+    "MEASURE LINE WIDTH",
+    "DEPOSIT PASSIVATION",
+    "CURE PASSIVATION",
+    "MEASURE PASSIVATION THICKNESS",
+    "OPEN PAD WINDOW",
+    "OPEN PAD WINDOW LITHO",
+    "PASSIVATION ETCH PAD OPENING",
+    "CLEAN PAD OPENING",
+    "MEASURE PAD OPENING",
+    "BACKSIDE THINNING CHECK",
+    "BACKSIDE CLEAN FINAL",
+    "DEPOSIT BACKSIDE PROTECTION",
+    "BACKSIDE ANNEAL",
+    "FINAL CLEAN",
+    "FINAL THICKNESS MEASURE",
+    "FINAL GEOMETRY CHECK",
+    "FINAL OXIDE CHECK",
+    "FINAL CD INSPECTION",
+    "PARAMETRIC TEST",
+    "LEAKAGE TEST",
+    "THRESHOLD VOLTAGE TEST",
+    "SWITCHING TEST",
+    "WAFER SORT TEST",
+    "YIELD ANALYSIS",
+    "LOT RELEASE",
+    "PACKAGE PREPARATION",
+    "SHIP LOT",
+    "PRE CLEAN INSPECTION",
+    "MEASURE INITIAL GEOMETRY",
+    "WET CLEAN RCA1",
+    "POST EXPOSE BAKE",
+    "MEASURE CD LEVEL 2",
+    "PRE ANNEAL CHECK",
+    "VIA ETCH",
+    "MEASURE VIA CD",
+    "MEASURE VIA RESISTANCE",
+    "ANNEAL METAL",
+    "DEPOSIT PASSIVATION LAYER",
+    "MEASURE PASSIVATION QUALITY",
+    "DEVELOP PAD WINDOW",
+    "FINAL LOT RELEASE",
+    "MEASURE INITIAL THICKNESS",
+    "FRONTSIDE CLEAN",
+    "DEPOSIT INTERLAYER DIELECTRIC",
+    "DENSIFY OXIDE",
+    "MEASURE DIELECTRIC THICKNESS",
+    "MEASURE SURFACE PLANARITY",
+    "VIA OPENING INSPECTION",
+    "CMP VIA FILL",
+    "MEASURE CONTACT RESISTANCE",
+    "DEPOSIT METAL 1",
+    "MEASURE METAL THICKNESS",
+    "PASSIVATION ETCH",
+    "FINAL PARTICLE INSPECTION",
+    "DIELECTRIC ETCH VIA",
+    "PAD WINDOW LITHO",
+    "FINAL ELECTRICAL TEST PREP",
+    "ELECTRICAL PARAMETRIC TEST",
+    "MEASURE SURFACE PARTICLES",
+    "OPEN BOND PAD WINDOW",
+    "CMP DIELECTRIC",
+    "FRONTSIDE CLEAN FINAL"
+]
+
+# function to convert a sequence of steps to a sequence of tokens
+# returns an array of indexes of the tokens in the alphabet
+def convert_to_tokens(sequence):
+    tokens = []
+    for step in sequence:
+        index = ec_alphabet.index(step)
+        if index is not None:
+            tokens.append(index)
+        else:
+            tokens.append(ec_alphabet.index("(UNKNOWN)"))
+    return tokens
+
+# function to convert a sequence of tokens to a sequence of steps
+def convert_to_steps(tokens):
+    sequence = []
+    for token in tokens:
+        sequence.append(ec_alphabet[token])
+    return sequence
+
+# quickly test the functions
+if __name__ == "__main__":
+    sequence = ["RECEIVE WAFER LOT", "LOT IDENTIFICATION", "INITIAL WAFER INSPECTION", "MEASURE SURFACE DEFECTS"]
+    tokens = convert_to_tokens(sequence)
+    print(tokens)
+    steps = convert_to_steps(tokens)
+    print(steps)
